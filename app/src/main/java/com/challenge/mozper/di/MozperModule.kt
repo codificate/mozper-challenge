@@ -6,6 +6,7 @@ import com.challenge.mozper.api.RetrofitInstance
 import com.challenge.mozper.data.api.MozperApi
 import com.challenge.mozper.data.database.MozperDatabase
 import com.challenge.mozper.data.repository.MozperApiRepositoryImpl
+import com.challenge.mozper.domain.repository.LoginDaoRepository
 import com.challenge.mozper.domain.repository.MozperApiRepository
 import com.challenge.mozper.domain.repository.MozperDaoRepository
 import dagger.Module
@@ -30,8 +31,13 @@ object MozperModule {
             .build()
 
     @Provides
-    fun provideMozperDAO(appDatabase: MozperDatabase): MozperDaoRepository {
+    fun provideEmployeeDAO(appDatabase: MozperDatabase): MozperDaoRepository {
         return appDatabase.employeesDao()
+    }
+
+    @Provides
+    fun provideUserDAO(appDatabase: MozperDatabase): LoginDaoRepository {
+        return appDatabase.userDao()
     }
 
     @Provides

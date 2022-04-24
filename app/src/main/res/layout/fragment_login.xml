@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+
+        <variable
+            name="event_handler"
+            type="com.challenge.mozper.presentation.login.LoginScreenEventHandler" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.login.LoginFragment">
+        
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/mozper_login_vertical_start_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/mozper_login_vertical_end_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/mozper_login_horizontal_top_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/mozper_login_middle_horizontal_top_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/mozper_login_horizontal_bottom_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/mozper_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/mozper_login_horizontal_top_guide" />
+
+        <TextView
+            android:id="@+id/login_bienvenido_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="20sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="@string/login_bienvenido_label"
+            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            tools:text="Bienvenido" />
+
+        <EditText
+            android:id="@+id/login_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@null"
+            android:ems="10"
+            android:maxLines="1"
+            android:fontFamily="@font/montserrat_bold"
+            android:hint="@string/login_email_hint"
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp"
+            android:textColor="@color/mozper_email"
+            android:textColorHint="@color/mozper_email"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/mozper_login_vertical_end_guide"
+            app:layout_constraintStart_toStartOf="@+id/mozper_login_vertical_start_guide"
+            app:layout_constraintTop_toBottomOf="@+id/login_bienvenido_label" />
+
+        <EditText
+            android:id="@+id/login_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@null"
+            android:ems="10"
+            android:fontFamily="@font/montserrat_bold"
+            android:hint="@string/login_password_hint"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:maxLines="1"
+            android:textColor="@color/mozper_password"
+            android:textColorHint="@color/mozper_password"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/login_email"
+            app:layout_constraintStart_toStartOf="@+id/login_email"
+            app:layout_constraintTop_toBottomOf="@+id/login_email" />
+
+        <View
+            android:id="@+id/login_button_background"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:onClick="@{() -> event_handler.onLoginClicked()}"
+            android:background="@drawable/login_button_background"
+            app:layout_constraintBottom_toTopOf="@+id/mozper_login_middle_horizontal_top_guide"
+            app:layout_constraintEnd_toStartOf="@+id/mozper_login_vertical_end_guide"
+            app:layout_constraintStart_toStartOf="@+id/mozper_login_vertical_start_guide"
+            app:layout_constraintTop_toBottomOf="@+id/login_password" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_button"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/montserrat_bold"
+            app:layout_constraintTop_toTopOf="@+id/login_button_background"
+            app:layout_constraintBottom_toBottomOf="@+id/login_button_background"
+            app:layout_constraintStart_toStartOf="@+id/login_button_background"
+            app:layout_constraintEnd_toEndOf="@+id/login_button_background"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
