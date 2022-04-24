@@ -1,5 +1,9 @@
-package com.challenge.mozper.data.response
+package com.challenge.mozper.domain
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Employee(
     val description: String,
     val firstName: String,
@@ -7,4 +11,4 @@ data class Employee(
     val image: String,
     val lastName: String,
     val rating: Double
-)
+): Parcelable
