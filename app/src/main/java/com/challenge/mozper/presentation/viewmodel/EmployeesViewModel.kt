@@ -1,11 +1,12 @@
-package com.challenge.mozper.presentation
+package com.challenge.mozper.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.challenge.mozper.base.DataResource
-import com.challenge.mozper.domain.FetchEmployeesFromApiUseCase
+import com.challenge.mozper.domain.use_cases.FetchEmployeesFromApiUseCase
+import com.challenge.mozper.presentation.states.EmployeeListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

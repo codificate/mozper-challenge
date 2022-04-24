@@ -1,14 +1,14 @@
 package com.challenge.mozper.data.response
 
-import com.challenge.mozper.domain.Employee
+import com.challenge.mozper.domain.model.Employee
 
 data class EmployeeResponse(
-    val description: String,
-    val firstName: String,
+    val description: String?,
+    val firstName: String?,
     val id: Int,
-    val image: String,
-    val lastName: String,
-    val rating: Double
+    val image: String?,
+    val lastName: String?,
+    val rating: Double?
 )
 
 fun EmployeeResponse.toEmployee(): Employee {

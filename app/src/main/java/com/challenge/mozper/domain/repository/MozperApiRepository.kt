@@ -1,4 +1,4 @@
-package com.challenge.mozper.domain
+package com.challenge.mozper.domain.repository
 
 import com.challenge.mozper.data.response.EmployeesResponse
 

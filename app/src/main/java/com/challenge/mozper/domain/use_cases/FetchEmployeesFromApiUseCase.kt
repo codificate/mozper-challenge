@@ -1,7 +1,9 @@
-package com.challenge.mozper.domain
+package com.challenge.mozper.domain.use_cases
 
 import com.challenge.mozper.base.DataResource
 import com.challenge.mozper.data.response.toEmployee
+import com.challenge.mozper.domain.repository.MozperApiRepository
+import com.challenge.mozper.domain.model.Employee
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException

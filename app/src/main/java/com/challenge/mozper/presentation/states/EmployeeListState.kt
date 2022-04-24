@@ -1,6 +1,6 @@
-package com.challenge.mozper.presentation
+package com.challenge.mozper.presentation.states
 
-import com.challenge.mozper.domain.Employee
+import com.challenge.mozper.domain.model.Employee
 
 data class EmployeeListState(
     val isLoading: Boolean = false,
