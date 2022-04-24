@@ -8,6 +8,7 @@ import com.challenge.mozper.base.DataResource
 import com.challenge.mozper.domain.model.Employee
 import com.challenge.mozper.domain.use_cases.FetchEmployeesDaoUseCase
 import com.challenge.mozper.domain.use_cases.FetchEmployeesFromApiUseCase
+import com.challenge.mozper.domain.use_cases.SaveEmployeesOnDatabaseUseCase
 import com.challenge.mozper.presentation.states.EmployeeListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -17,7 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class EmployeesViewModel @Inject constructor(
     private val fetchEmployeesApiUseCase: FetchEmployeesFromApiUseCase,
-    private val fetchEmployeesDaoUseCase: FetchEmployeesDaoUseCase
+    private val fetchEmployeesDaoUseCase: FetchEmployeesDaoUseCase,
+    private val saveEmployeesOnDatabaseUseCase: SaveEmployeesOnDatabaseUseCase
 ) :
     ViewModel() {
 
@@ -53,6 +55,7 @@ class EmployeesViewModel @Inject constructor(
             }
             is DataResource.Success -> {
                 _mutableEmployeesState.postValue(EmployeeListState(employees = result.data))
+                if (!apiErrorOCurred) { result.data?.let { saveEmployeesOnDatabaseUseCase(it) } }
             }
         }
     }
