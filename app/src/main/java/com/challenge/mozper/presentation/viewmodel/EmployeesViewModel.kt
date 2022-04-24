@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.challenge.mozper.base.DataResource
+import com.challenge.mozper.domain.model.Employee
+import com.challenge.mozper.domain.use_cases.FetchEmployeesDaoUseCase
 import com.challenge.mozper.domain.use_cases.FetchEmployeesFromApiUseCase
 import com.challenge.mozper.presentation.states.EmployeeListState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +15,10 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
-class EmployeesViewModel @Inject constructor(private val fetchEmployeesApiUseCase: FetchEmployeesFromApiUseCase) :
+class EmployeesViewModel @Inject constructor(
+    private val fetchEmployeesApiUseCase: FetchEmployeesFromApiUseCase,
+    private val fetchEmployeesDaoUseCase: FetchEmployeesDaoUseCase
+) :
     ViewModel() {
 
     private val _mutableEmployeesState = MutableLiveData<EmployeeListState>(EmployeeListState())
@@ -25,18 +30,39 @@ class EmployeesViewModel @Inject constructor(private val fetchEmployeesApiUseCas
 
     private fun fetchEmployeesFromApi() {
         fetchEmployeesApiUseCase().onEach { result ->
-            when (result) {
-                is DataResource.Error -> {
-                    _mutableEmployeesState.postValue(EmployeeListState(error = result.message ?: "An unexpected error occurred"))
-                }
-                is DataResource.Loading -> {
-                    _mutableEmployeesState.postValue(EmployeeListState(isLoading = true))
-                }
-                is DataResource.Success -> {
-                    _mutableEmployeesState.postValue(EmployeeListState(employees = result.data))
-                }
-            }
+            handleEmployeeData(result, result is DataResource.Error)
         }.launchIn(viewModelScope)
+    }
+
+    private fun fetchEmployeesFromDao() {
+        fetchEmployeesDaoUseCase().onEach { result ->
+            handleEmployeeData(result)
+        }.launchIn(viewModelScope)
+    }
+
+    private fun handleEmployeeData(result: DataResource<List<Employee>>, apiErrorOCurred: Boolean = false) {
+        when (result) {
+            is DataResource.Error -> {
+                if (apiErrorOCurred) {
+                    fetchEmployeesFromDao()
+                }
+                postError(result)
+            }
+            is DataResource.Loading -> {
+                _mutableEmployeesState.postValue(EmployeeListState(isLoading = true))
+            }
+            is DataResource.Success -> {
+                _mutableEmployeesState.postValue(EmployeeListState(employees = result.data))
+            }
+        }
+    }
+
+    private fun postError(result: DataResource<List<Employee>>) {
+        _mutableEmployeesState.postValue(
+            EmployeeListState(
+                error = result.message ?: "An unexpected error occurred"
+            )
+        )
     }
 
 }
