@@ -12,6 +12,7 @@ import com.challenge.mozper.R
 import com.challenge.mozper.databinding.FragmentLoginBinding
 import com.challenge.mozper.presentation.viewmodel.LoginViewModel
 import com.challenge.mozper.util.isEmailValid
+import com.challenge.mozper.util.showErrorToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -56,9 +57,5 @@ class LoginFragment() : Fragment(R.layout.fragment_login), LoginScreenEventHandl
         }
 
         userViewModel.saveUser(binding.loginEmail.toString())
-    }
-
-    private fun showErrorToast(error: String) {
-        Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
     }
 }

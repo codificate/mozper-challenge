@@ -10,4 +10,6 @@
 
     <color name="mozper_email">#6441e6</color>
     <color name="mozper_password">#585987</color>
+    <color name="mozper_search">#585987</color>
+    <color name="mozper_employee_name">#585987</color>
 </resources>

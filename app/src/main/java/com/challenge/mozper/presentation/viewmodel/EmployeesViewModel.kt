@@ -26,8 +26,16 @@ class EmployeesViewModel @Inject constructor(
     private val _mutableEmployeesState = MutableLiveData<EmployeeListState>(EmployeeListState())
     val employeesState: LiveData<EmployeeListState> = _mutableEmployeesState
 
+    private var employeeList: MutableList<Employee> = mutableListOf()
+
     init {
         fetchEmployeesFromApi()
+    }
+
+    fun findEmployeeBy(name: String) {
+        employeeList.filter { employee -> employee.firstName.contentEquals(name, true) }.let { employeeMatches ->
+            _mutableEmployeesState.postValue(EmployeeListState(employees = employeeMatches))
+        }
     }
 
     private fun fetchEmployeesFromApi() {
@@ -54,6 +62,7 @@ class EmployeesViewModel @Inject constructor(
                 _mutableEmployeesState.postValue(EmployeeListState(isLoading = true))
             }
             is DataResource.Success -> {
+                result.data?.let { employeeList = it.toMutableList() }
                 _mutableEmployeesState.postValue(EmployeeListState(employees = result.data))
                 if (!apiErrorOCurred) { result.data?.let { saveEmployeesOnDatabaseUseCase(it) } }
             }

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.employees.EmployeeListFragment">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/mozper_employees_vertical_start_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/mozper_employees_vertical_end_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/mozper_employees_horizontal_top_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/mozper_employees_horizontal_bottom_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <ImageView
+            android:id="@+id/mozper_image"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/mozper_logo"
+            app:layout_constraintStart_toStartOf="@+id/mozper_employees_vertical_start_guide"
+            app:layout_constraintTop_toTopOf="@+id/mozper_employees_horizontal_top_guide" />
+
+        <EditText
+            android:id="@+id/search_employee"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/rounded_stroke"
+            android:fontFamily="@font/montserrat_regular"
+            android:hint="@string/find_employee"
+            android:imeOptions="actionSearch"
+            android:padding="12dp"
+            android:textColor="@color/mozper_search"
+            android:textColorHint="@color/mozper_search"
+            app:layout_constraintEnd_toStartOf="@+id/mozper_employees_vertical_end_guide"
+            app:layout_constraintStart_toEndOf="@id/mozper_image"
+            app:layout_constraintTop_toTopOf="@id/mozper_employees_horizontal_top_guide" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/employee_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:listitem="@layout/employee_row"
+            app:layout_constraintBottom_toBottomOf="@id/mozper_employees_horizontal_bottom_guide"
+            app:layout_constraintEnd_toEndOf="@+id/mozper_employees_vertical_end_guide"
+            app:layout_constraintStart_toStartOf="@+id/mozper_employees_vertical_start_guide"
+            app:layout_constraintTop_toBottomOf="@+id/search_employee" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
