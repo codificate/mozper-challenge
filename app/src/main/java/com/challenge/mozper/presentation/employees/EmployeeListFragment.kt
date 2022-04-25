@@ -71,7 +71,7 @@ class EmployeeListFragment : Fragment(R.layout.fragment_employee_list), Employee
                 editable?.let {
                     if (it.length >= 3) {
                         employeesViewModel.findEmployeeBy(it.toString())
-                    } else if (it.isEmpty()) {
+                    } else if (it.length < 3 || it.isEmpty()) {
                         employeesViewModel.findEmployeeBy("")
                     }
                 }
