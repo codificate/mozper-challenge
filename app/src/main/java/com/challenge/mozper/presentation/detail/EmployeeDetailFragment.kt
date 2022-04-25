@@ -9,6 +9,7 @@ import androidx.navigation.fragment.navArgs
 import com.challenge.mozper.R
 import com.challenge.mozper.databinding.FragmentEmployeeDetailBinding
 import com.challenge.mozper.util.downloadImage
+import com.challenge.mozper.util.downloadImageRoundCorners
 
 class EmployeeDetailFragment : Fragment(R.layout.fragment_employee_detail) {
 
@@ -33,11 +34,20 @@ class EmployeeDetailFragment : Fragment(R.layout.fragment_employee_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        args.employee.image?.takeIf { it.isNotEmpty() }.let { avatar ->
-            avatar?.let {
-                downloadImage(it, binding.root.context)
-                    .into(binding.employeeAvatar)
+        with(args.employee) {
+            image?.takeIf { it.isNotEmpty() }.let { avatar ->
+                avatar?.let {
+                    downloadImageRoundCorners(32, it, binding.root.context)
+                        .into(binding.employeeAvatar)
+                }
+            }
+            rating?.let {
+                binding.employeeRating.setIsIndicator(true)
+                binding.employeeRating.numStars = 5
+                binding.employeeRating.max = 5
+                binding.employeeRating.rating = it.toFloat()
             }
         }
+
     }
 }

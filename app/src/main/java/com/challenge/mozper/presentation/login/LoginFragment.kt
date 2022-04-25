@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.challenge.mozper.R
 import com.challenge.mozper.databinding.FragmentLoginBinding
 import com.challenge.mozper.presentation.viewmodel.LoginViewModel
@@ -36,7 +37,7 @@ class LoginFragment() : Fragment(R.layout.fragment_login), LoginScreenEventHandl
         userViewModel.userState.observe(viewLifecycleOwner, Observer { userState ->
             when {
                 userState.user != null -> {
-
+                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToEmployeesListFragment())
                 }
                 userState.isLoading -> {
                     // no-op
@@ -48,14 +49,15 @@ class LoginFragment() : Fragment(R.layout.fragment_login), LoginScreenEventHandl
 
     override fun onLoginClicked() {
         if (binding.loginEmail.toString().isEmpty() || binding.loginPassword.toString().isEmpty()) {
+            binding.loginEmail.error = "Credentials must not be empty"
             showErrorToast("Credentials must not be empty")
         }
 
-        if (!binding.loginEmail.toString().isEmailValid()) {
+        if (!binding.loginEmail.text.toString().isEmailValid()) {
             binding.loginEmail.error = "Must be a valid email"
             showErrorToast("Must be a valid email")
         }
 
-        userViewModel.saveUser(binding.loginEmail.toString())
+        userViewModel.saveUser(binding.loginEmail.text.toString())
     }
 }

@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.challenge.mozper.R
 import com.challenge.mozper.databinding.FragmentEmployeeListBinding
@@ -40,16 +40,21 @@ class EmployeeListFragment : Fragment(R.layout.fragment_employee_list), Employee
         binding.employeeList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.employeeList.adapter = adapter
         setSearchEmployeeListener()
-        employeesViewModel.employeesState.observe(viewLifecycleOwner, Observer { employeesState ->
+        employeesViewModel.employeesState.observe(viewLifecycleOwner) { employeesState ->
             when {
-                employeesState.employees?.isNotEmpty() == true -> employeesState.employees.let { adapter.setEmployeesList(it) }
+                employeesState.employees?.isNotEmpty() == true -> employeesState.employees.let {
+                    adapter.setEmployeesList(
+                        it
+                    )
+                }
                 employeesState.error.isNotEmpty() -> showErrorToast(employeesState.error)
             }
-        })
+        }
     }
 
     override fun onEmployeeClicked(employee: Employee) {
         hideKeyboard()
+        findNavController().navigate(EmployeeListFragmentDirections.actionEmployeesListFragmentToEmployeeDetailFragment(employee))
     }
 
     private fun setSearchEmployeeListener() {
@@ -66,6 +71,8 @@ class EmployeeListFragment : Fragment(R.layout.fragment_employee_list), Employee
                 editable?.let {
                     if (it.length >= 3) {
                         employeesViewModel.findEmployeeBy(it.toString())
+                    } else if (it.isEmpty()) {
+                        employeesViewModel.findEmployeeBy("")
                     }
                 }
             }

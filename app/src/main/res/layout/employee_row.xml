@@ -20,13 +20,13 @@
             android:id="@+id/employee_image"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@tools:sample/avatars"
+            android:contentDescription="TODO" />
 
         <TextView
             android:id="@+id/employee_name"
@@ -36,21 +36,18 @@
             android:fontFamily="@font/montserrat_regular"
             android:textColor="@color/mozper_employee_name"
             android:textSize="24sp"
-            android:text="@{employee.firstName - employee.lastName }"
+            android:text="@{employee.firstName}"
             app:layout_constraintStart_toEndOf="@+id/employee_image"
             app:layout_constraintTop_toTopOf="@+id/employee_image"
             tools:text="RaphBTC" />
 
-        <TextView
+        <RatingBar
             android:id="@+id/employee_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/montserrat_light"
-            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@+id/employee_name"
             app:layout_constraintTop_toBottomOf="@+id/employee_name"
-            tools:text="Yo" />
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

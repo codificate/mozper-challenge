@@ -8,10 +8,8 @@ import javax.inject.Inject
 
 class SaveUserCredentialUseCase @Inject constructor(private val daoRepository: LoginDaoRepository) {
 
-    operator fun invoke(email: String) {
-        flow<Unit> {
-            daoRepository.insert(User(email, Date()))
-        }
+    operator fun invoke(email: String) = flow<Unit> {
+        daoRepository.insert(User(email, Date()))
     }
 
 }

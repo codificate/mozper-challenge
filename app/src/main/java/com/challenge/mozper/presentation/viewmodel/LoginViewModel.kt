@@ -27,7 +27,7 @@ class LoginViewModel @Inject constructor(
     }
 
     fun saveUser(email: String) {
-        saveUserCredentialUseCase(email)
+        saveUserCredentialUseCase(email).launchIn(viewModelScope)
         existUserSessionAvailable()
     }
 

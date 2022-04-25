@@ -33,8 +33,13 @@ class EmployeesViewModel @Inject constructor(
     }
 
     fun findEmployeeBy(name: String) {
-        employeeList.filter { employee -> employee.firstName.contentEquals(name, true) }.let { employeeMatches ->
-            _mutableEmployeesState.postValue(EmployeeListState(employees = employeeMatches))
+        if (name.isEmpty()) {
+            _mutableEmployeesState.postValue(EmployeeListState(employees = employeeList))
+        } else {
+            employeeList.filter { employee -> employee.firstName.contentEquals(name, true) }
+                .let { employeeMatches ->
+                    _mutableEmployeesState.postValue(EmployeeListState(employees = employeeMatches))
+                }
         }
     }
 
@@ -50,7 +55,10 @@ class EmployeesViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    private fun handleEmployeeData(result: DataResource<List<Employee>>, apiErrorOCurred: Boolean = false) {
+    private fun handleEmployeeData(
+        result: DataResource<List<Employee>>,
+        apiErrorOCurred: Boolean = false
+    ) {
         when (result) {
             is DataResource.Error -> {
                 if (apiErrorOCurred) {
@@ -64,7 +72,9 @@ class EmployeesViewModel @Inject constructor(
             is DataResource.Success -> {
                 result.data?.let { employeeList = it.toMutableList() }
                 _mutableEmployeesState.postValue(EmployeeListState(employees = result.data))
-                if (!apiErrorOCurred) { result.data?.let { saveEmployeesOnDatabaseUseCase(it) } }
+                if (!apiErrorOCurred) {
+                    result.data?.let { saveEmployeesOnDatabaseUseCase(it) }
+                }
             }
         }
     }

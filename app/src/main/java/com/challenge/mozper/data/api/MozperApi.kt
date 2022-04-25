@@ -5,7 +5,7 @@ import retrofit2.http.GET
 
 interface MozperApi {
 
-    @GET()
+    @GET("/")
     suspend fun getEmployees(): EmployeesResponse
 
 }
