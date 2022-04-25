@@ -4,8 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-
         <variable
             name="event_handler"
             type="com.challenge.mozper.presentation.login.LoginScreenEventHandler" />

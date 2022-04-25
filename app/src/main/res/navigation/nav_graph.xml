@@ -16,8 +16,8 @@
 
     <fragment
         android:id="@+id/employeesListFragment"
-        android:name="com.challenge.mozper.presentation.login.LoginFragment"
-        tools:layout="@layout/fragment_login">
+        android:name="com.challenge.mozper.presentation.employees.EmployeeListFragment"
+        tools:layout="@layout/fragment_employee_list">
         <action
             android:id="@+id/action_employeesListFragment_to_employeeDetailFragment"
             app:destination="@id/employeeDetailFragment" />
@@ -25,11 +25,11 @@
 
     <fragment
         android:id="@+id/employeeDetailFragment"
-        android:name="com.challenge.mozper.presentation.login.LoginFragment"
-        tools:layout="@layout/fragment_login">
+        android:name="com.challenge.mozper.presentation.detail.EmployeeDetailFragment"
+        tools:layout="@layout/fragment_employee_detail">
         <argument
-            android:name="user"
-            app:argType="com.challenge.mozper.domain.model.User" />
+            android:name="employee"
+            app:argType="com.challenge.mozper.domain.model.Employee" />
     </fragment>
 
 </navigation>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="employee"
+            type="com.challenge.mozper.domain.model.Employee" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.detail.EmployeeDetailFragment">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/employee_vertical_start_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.2" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/employee_vertical_end_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.8" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/employee_horizontal_top_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="146dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/employee_horizontal_bottom_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.75" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/employee_horizontal_first_top_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <ImageView
+            android:id="@+id/mozper_image"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/mozper_logo"
+            app:layout_constraintEnd_toStartOf="@+id/employee_vertical_start_guide"
+            app:layout_constraintTop_toTopOf="@+id/employee_horizontal_first_top_guide" />
+
+        <View
+            android:id="@+id/employee_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/employee_background"
+            app:layout_constraintBottom_toBottomOf="@id/employee_horizontal_bottom_guide"
+            app:layout_constraintEnd_toEndOf="@id/employee_vertical_end_guide"
+            app:layout_constraintStart_toStartOf="@id/employee_vertical_start_guide"
+            app:layout_constraintTop_toTopOf="@id/employee_horizontal_top_guide" />
+
+        <ImageView
+            android:id="@+id/employee_avatar"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            app:layout_constraintBottom_toTopOf="@+id/employee_horizontal_top_guide"
+            app:layout_constraintEnd_toStartOf="@+id/employee_vertical_end_guide"
+            app:layout_constraintStart_toStartOf="@+id/employee_vertical_start_guide"
+            app:layout_constraintTop_toTopOf="@+id/employee_horizontal_top_guide"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/employee_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/montserrat_bold"
+            tools:text="Mozper"
+            android:text="@{employee.firstName - employee.lastName }"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@+id/employee_vertical_end_guide"
+            app:layout_constraintStart_toStartOf="@+id/employee_vertical_start_guide"
+            app:layout_constraintTop_toBottomOf="@+id/employee_avatar" />
+
+        <TextView
+            android:id="@+id/employee_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:text="@{employee.description }"
+            android:fontFamily="@font/montserrat_light"
+            tools:text="@string/lorem_ipsum"
+            app:layout_constraintEnd_toStartOf="@+id/employee_vertical_end_guide"
+            app:layout_constraintStart_toStartOf="@+id/employee_vertical_start_guide"
+            app:layout_constraintTop_toBottomOf="@+id/employee_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
